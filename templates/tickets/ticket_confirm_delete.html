@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Xoá ticket — TicketDesk{% endblock %}
+
+{% block content %}
+  <a class="back-link" href="{% url 'tickets:detail' object.pk %}">‹ Về ticket #{{ object.pk }}</a>
+
+  <div class="card danger-card">
+    <div class="card-head">Xoá ticket #{{ object.pk }}</div>
+    <div class="card-body">
+      <p style="margin-top:0">Ticket <strong>{{ object.title }}</strong> sẽ bị xoá vĩnh viễn. Thao tác này không thể hoàn tác.</p>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+          <button class="btn btn-danger" type="submit">Xoá ticket</button>
+          <a class="btn btn-light" href="{% url 'tickets:detail' object.pk %}">Huỷ</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

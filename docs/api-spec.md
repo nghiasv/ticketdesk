@@ -1,6 +1,6 @@
 # TicketDesk — Đặc tả API v1
 
-> **Trạng thái:** Bản nháp — chờ mentor duyệt
+> **Trạng thái:** Chính thức — đã được mentor duyệt
 > **Dựa trên:** [Tài liệu yêu cầu](user-stories.md)
 > **Công nghệ:** Django REST Framework, djangorestframework-simplejwt, django-filter, drf-spectacular
 
