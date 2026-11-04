@@ -1,0 +1,423 @@
+/* TicketDesk — giao diện chung (tông xanh ngọc, card bo tròn) */
+
+:root {
+  --bg: #eef5f3;
+  --surface: #ffffff;
+  --surface-soft: #f4f9f8;
+  --border: #e1ece9;
+  --text: #1d2b2a;
+  --muted: #6c7f7c;
+  --primary: #1f9e8a;
+  --primary-dark: #157a6b;
+  --primary-soft: #e2f4f0;
+  --danger: #e0524f;
+  --danger-dark: #c23f3c;
+  --danger-soft: #fdecec;
+  --radius-lg: 20px;
+  --radius: 14px;
+  --shadow: 0 6px 20px rgba(21, 122, 107, 0.08);
+  --shadow-sm: 0 2px 8px rgba(21, 122, 107, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Vòng tròn trang trí phía sau, giống ảnh mẫu */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+}
+body::before { width: 520px; height: 520px; right: -180px; bottom: -200px; background: #d4ede7; }
+body::after { width: 260px; height: 260px; left: -110px; top: 180px; background: #e3f2ee; }
+
+a { color: var(--primary); text-decoration: none; }
+
+h1 { font-size: 1.55rem; font-weight: 700; margin: 0; }
+h2 { font-size: 1.05rem; font-weight: 600; margin: 0 0 14px; }
+
+svg { display: block; }
+
+/* ---------- Thanh trên cùng ---------- */
+
+.topbar {
+  background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(21, 122, 107, 0.25);
+}
+
+.topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; font-size: 1.1rem; }
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.18);
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.nav { display: flex; gap: 6px; flex: 1; }
+.nav a { padding: 8px 16px; border-radius: 999px; color: rgba(255, 255, 255, 0.8); font-weight: 500; }
+.nav a:hover { color: #fff; background: rgba(255, 255, 255, 0.12); }
+.nav a.active { color: var(--primary-dark); background: #fff; }
+
+.user-menu { display: flex; align-items: center; gap: 12px; }
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--primary-dark);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.user-info { display: flex; flex-direction: column; line-height: 1.25; }
+.user-info .name { font-weight: 600; }
+.user-info .role { font-size: 0.78rem; opacity: 0.8; }
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.logout-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+/* ---------- Bố cục ---------- */
+
+.container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 56px; }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.page-header .subtitle { color: var(--muted); margin: 4px 0 0; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.back-link:hover { color: var(--primary); }
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.card-body { padding: 24px; }
+
+.card-head {
+  background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+  color: #fff;
+  padding: 16px 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---------- Nút ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(31, 158, 138, 0.3); }
+.btn-primary:hover { background: var(--primary-dark); }
+
+.btn-outline { background: var(--surface); color: var(--primary); border-color: var(--primary); }
+.btn-outline:hover { background: var(--primary-soft); }
+
+.btn-danger { background: var(--danger); color: #fff; box-shadow: 0 4px 12px rgba(224, 82, 79, 0.25); }
+.btn-danger:hover { background: var(--danger-dark); }
+
+.btn-light { background: var(--surface-soft); color: var(--muted); }
+.btn-light:hover { background: var(--border); color: var(--text); }
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- Ô thống kê ---------- */
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+
+.stat {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.stat-icon.blue { background: #e6efff; color: #3b6fd8; }
+.stat-icon.orange { background: #fff1dd; color: #d98a12; }
+.stat-icon.green { background: #e1f5e8; color: #2e9a57; }
+
+.stat-value { font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+.stat-label { color: var(--muted); font-size: 0.85rem; }
+
+/* ---------- Danh sách ticket dạng thẻ ---------- */
+
+.section-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.section-title h2 { margin: 0; }
+
+.ticket-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+
+.ticket-item a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 20px;
+  color: var(--text);
+  border-left: 4px solid var(--primary);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.ticket-item a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.ticket-item.prio-high a { border-left-color: var(--danger); }
+.ticket-item.prio-low a { border-left-color: #b7c7c4; }
+
+.ticket-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.ticket-main { flex: 1; min-width: 0; }
+.ticket-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ticket-meta { color: var(--muted); font-size: 0.85rem; display: flex; gap: 6px 14px; flex-wrap: wrap; margin-top: 2px; }
+
+.ticket-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+
+.muted { color: var(--muted); }
+
+/* ---------- Badge ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-new { background: #e6efff; color: #3b6fd8; }
+.status-in_progress { background: #fff1dd; color: #c27a0c; }
+.status-resolved { background: #e1f5e8; color: #2e9a57; }
+.status-closed { background: #eceff0; color: #66737a; }
+
+.prio-1 { background: #eceff0; color: #66737a; }
+.prio-2 { background: #fff1dd; color: #c27a0c; }
+.prio-3 { background: var(--danger-soft); color: var(--danger-dark); }
+
+/* ---------- Trang chi tiết ---------- */
+
+.grid-detail { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
+
+.info-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.info-tile { background: var(--surface-soft); border-radius: var(--radius); padding: 14px; }
+.info-tile .label { color: var(--muted); font-size: 0.8rem; margin-bottom: 4px; }
+.info-tile .value { font-weight: 600; }
+.info-tile.wide { grid-column: 1 / -1; }
+
+.description { color: var(--text); }
+
+.person { display: flex; align-items: center; gap: 10px; }
+.person .avatar { width: 32px; height: 32px; background: var(--primary-soft); color: var(--primary); font-size: 0.85rem; }
+
+/* ---------- Form ---------- */
+
+.form-card { max-width: 720px; }
+
+.field { margin-bottom: 18px; }
+.field label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface-soft);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.field textarea { min-height: 150px; resize: vertical; }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus { outline: none; border-color: var(--primary); background: var(--surface); }
+
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea { border-color: var(--danger); background: var(--danger-soft); }
+
+.helptext { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+
+.errorlist { list-style: none; padding: 0; margin: 6px 0 0; color: var(--danger); font-size: 0.86rem; }
+
+.form-actions { display: flex; gap: 10px; margin-top: 24px; }
+
+/* ---------- Thông báo ---------- */
+
+.messages { list-style: none; padding: 0; margin: 0 0 20px; }
+.alert { padding: 12px 18px; border-radius: 12px; margin-bottom: 14px; font-weight: 500; }
+.alert-success { background: #e1f5e8; color: #1f7a43; }
+.alert-error { background: var(--danger-soft); color: var(--danger-dark); }
+.alert-info,
+.alert-warning { background: var(--primary-soft); color: var(--primary-dark); }
+
+/* ---------- Trạng thái rỗng, phân trang ---------- */
+
+.empty { text-align: center; padding: 56px 24px; }
+.empty .ticket-icon { width: 72px; height: 72px; margin: 0 auto 16px; }
+.empty h2 { margin-bottom: 6px; }
+.empty p { color: var(--muted); margin: 0 0 20px; }
+
+.pagination { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; color: var(--muted); }
+
+/* ---------- Trang đăng nhập ---------- */
+
+.auth-page { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+
+.auth-hero {
+  background: linear-gradient(150deg, var(--primary-dark), var(--primary));
+  color: #fff;
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.auth-hero::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  right: -140px;
+  bottom: -140px;
+}
+.auth-hero .brand-mark { width: 64px; height: 64px; border-radius: 18px; margin-bottom: 24px; }
+.auth-hero h1 { font-size: 2.2rem; line-height: 1.2; }
+.auth-hero p { opacity: 0.85; max-width: 380px; margin-top: 12px; }
+
+.auth-features { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 10px; }
+.auth-features li {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 8px 18px;
+  width: fit-content;
+  font-weight: 500;
+}
+
+.auth-form { display: grid; place-items: center; padding: 32px; }
+.auth-card { width: 100%; max-width: 400px; }
+.auth-card .card-body { padding: 36px; }
+.auth-card h2 { font-size: 1.4rem; margin-bottom: 4px; }
+.auth-card .subtitle { color: var(--muted); margin: 0 0 24px; }
+.auth-card .btn { width: 100%; padding: 13px; margin-top: 6px; }
+
+/* ---------- Xoá ---------- */
+
+.danger-card { max-width: 560px; }
+.danger-card .card-head { background: linear-gradient(120deg, var(--danger-dark), var(--danger)); }
+
+/* ---------- Màn hình nhỏ ---------- */
+
+@media (max-width: 900px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .grid-detail { grid-template-columns: 1fr; }
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-hero { padding: 40px 28px; }
+}
+
+@media (max-width: 640px) {
+  .topbar-inner { gap: 12px; padding: 0 16px; }
+  .user-info, .brand-text { display: none; }
+  .container { padding: 22px 16px 40px; }
+  .ticket-side { display: none; }
+}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Sửa ticket{% else %}Tạo ticket{% endif %} — TicketDesk{% endblock %}
+
+{% block content %}
+  {% if object %}
+    <a class="back-link" href="{% url 'tickets:detail' object.pk %}">‹ Về ticket #{{ object.pk }}</a>
+  {% else %}
+    <a class="back-link" href="{% url 'tickets:list' %}">‹ Về danh sách</a>
+  {% endif %}
+
+  <div class="card form-card">
+    <div class="card-head">
+      {% include "partials/icon_ticket.html" %}
+      {% if object %}Sửa ticket #{{ object.pk }}{% else %}Tạo ticket mới{% endif %}
+    </div>
+    <div class="card-body">
+      <p class="muted" style="margin-top:0">
+        {% if object %}Cập nhật thông tin ticket.{% else %}Mô tả vấn đề bạn gặp phải, nhân viên hỗ trợ sẽ liên hệ sớm.{% endif %}
+      </p>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-error">{{ form.non_field_errors|join:" " }}</div>
+        {% endif %}
+
+        {% for field in form %}
+          <div class="field{% if field.errors %} has-error{% endif %}">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}<span class="helptext">{{ field.help_text }}</span>{% endif %}
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">{% if object %}Lưu thay đổi{% else %}Gửi ticket{% endif %}</button>
+          <a class="btn btn-light" href="{% if object %}{% url 'tickets:detail' object.pk %}{% else %}{% url 'tickets:list' %}{% endif %}">Huỷ</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

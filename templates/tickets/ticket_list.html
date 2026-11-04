@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Danh sách ticket — TicketDesk{% endblock %}
+
+{% block content %}
+  <div class="page-header">
+    <div>
+      <h1>Xin chào, {{ user.get_full_name|default:user.username }}</h1>
+      <p class="subtitle">Theo dõi các yêu cầu hỗ trợ của bạn tại đây.</p>
+    </div>
+    <a class="btn btn-primary" href="{% url 'tickets:create' %}">+ Tạo ticket</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-icon">{% include "partials/icon_ticket.html" %}</span>
+      <div><div class="stat-value">{{ stats.total }}</div><div class="stat-label">Tổng ticket</div></div>
+    </div>
+    <div class="stat">
+      <span class="stat-icon blue">{% include "partials/icon_ticket.html" %}</span>
+      <div><div class="stat-value">{{ stats.new }}</div><div class="stat-label">Mới</div></div>
+    </div>
+    <div class="stat">
+      <span class="stat-icon orange">{% include "partials/icon_ticket.html" %}</span>
+      <div><div class="stat-value">{{ stats.in_progress }}</div><div class="stat-label">Đang xử lý</div></div>
+    </div>
+    <div class="stat">
+      <span class="stat-icon green">{% include "partials/icon_ticket.html" %}</span>
+      <div><div class="stat-value">{{ stats.done }}</div><div class="stat-label">Đã xử lý / đóng</div></div>
+    </div>
+  </div>
+
+  {% if ticket_list %}
+    <div class="section-title">
+      <h2>Ticket gần đây</h2>
+      <span class="muted">{{ page_obj.paginator.count }} ticket</span>
+    </div>
+
+    <ul class="ticket-list">
+      {% for ticket in ticket_list %}
+        <li class="ticket-item {% if ticket.priority == 3 %}prio-high{% elif ticket.priority == 1 %}prio-low{% endif %}">
+          <a href="{% url 'tickets:detail' ticket.pk %}">
+            <span class="ticket-icon">{% include "partials/icon_ticket.html" %}</span>
+            <div class="ticket-main">
+              <div class="ticket-title">{{ ticket.title }}</div>
+              <div class="ticket-meta">
+                <span>#{{ ticket.pk }}</span>
+                <span>{{ ticket.category }}</span>
+                <span>{{ ticket.created_at|date:"d/m/Y H:i" }}</span>
+                <span>Xử lý: {{ ticket.assignee|default:"chưa có" }}</span>
+              </div>
+            </div>
+            <div class="ticket-side">
+              <span class="badge status-{{ ticket.status }}">{{ ticket.get_status_display }}</span>
+              <span class="badge prio-{{ ticket.priority }}">{{ ticket.get_priority_display }}</span>
+            </div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+      <div class="pagination">
+        <span>Trang {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+        <div class="actions">
+          {% if page_obj.has_previous %}
+            <a class="btn btn-outline" href="?page={{ page_obj.previous_page_number }}">‹ Trước</a>
+          {% endif %}
+          {% if page_obj.has_next %}
+            <a class="btn btn-outline" href="?page={{ page_obj.next_page_number }}">Sau ›</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="card">
+      <div class="empty">
+        <span class="ticket-icon">{% include "partials/icon_ticket.html" %}</span>
+        <h2>Chưa có ticket nào</h2>
+        <p>Gửi yêu cầu hỗ trợ đầu tiên để bắt đầu.</p>
+        <a class="btn btn-primary" href="{% url 'tickets:create' %}">+ Tạo ticket</a>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
