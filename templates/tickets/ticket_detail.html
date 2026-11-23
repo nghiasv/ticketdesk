@@ -8,7 +8,7 @@
   <div class="page-header">
     <div>
       <h1>{{ ticket.title }}</h1>
-      <p class="subtitle">Ticket #{{ ticket.pk }} · tạo lúc {{ ticket.created_at|date:"d/m/Y H:i" }}</p>
+      <p class="subtitle">Ticket {{ ticket.code }} · tạo lúc {{ ticket.created_at|date:"d/m/Y H:i" }}</p>
     </div>
     <div class="actions">
       <a class="btn btn-outline" href="{% url 'tickets:update' ticket.pk %}">Sửa</a>

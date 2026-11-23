@@ -44,7 +44,7 @@
             <div class="ticket-main">
               <div class="ticket-title">{{ ticket.title }}</div>
               <div class="ticket-meta">
-                <span>#{{ ticket.pk }}</span>
+                <span>{{ ticket.code }}</span>
                 <span>{{ ticket.category }}</span>
                 <span>{{ ticket.created_at|date:"d/m/Y H:i" }}</span>
                 <span>Xử lý: {{ ticket.assignee|default:"chưa có" }}</span>

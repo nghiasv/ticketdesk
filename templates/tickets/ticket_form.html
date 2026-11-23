@@ -4,7 +4,7 @@
 
 {% block content %}
   {% if object %}
-    <a class="back-link" href="{% url 'tickets:detail' object.pk %}">‹ Về ticket #{{ object.pk }}</a>
+    <a class="back-link" href="{% url 'tickets:detail' object.pk %}">‹ Về ticket {{ object.code }}</a>
   {% else %}
     <a class="back-link" href="{% url 'tickets:list' %}">‹ Về danh sách</a>
   {% endif %}
@@ -12,7 +12,7 @@
   <div class="card form-card">
     <div class="card-head">
       {% include "partials/icon_ticket.html" %}
-      {% if object %}Sửa ticket #{{ object.pk }}{% else %}Tạo ticket mới{% endif %}
+      {% if object %}Sửa ticket {{ object.code }}{% else %}Tạo ticket mới{% endif %}
     </div>
     <div class="card-body">
       <p class="muted" style="margin-top:0">
