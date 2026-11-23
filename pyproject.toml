@@ -23,8 +23,16 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    "django-debug-toolbar>=8.0.0",
     "pre-commit>=4.7.0",
     "pytest>=9.1.1",
     "pytest-django>=4.14.0",
     "ruff>=0.17.0",
 ]
+
+[tool.ruff]
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+# Django khai báo cấu hình class bằng list (list_display, fields...), không phải lỗi thật
+ignore = ["RUF012"]

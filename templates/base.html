@@ -24,6 +24,9 @@
           {% if user.is_authenticated %}
             <a href="{% url 'tickets:list' %}" class="{% if current == 'list' or current == 'detail' %}active{% endif %}">Ticket</a>
             <a href="{% url 'tickets:create' %}" class="{% if current == 'create' %}active{% endif %}">Tạo ticket</a>
+            {% if user.role == "manager" %}
+              <a href="{% url 'tickets:stats' %}" class="{% if current == 'stats' %}active{% endif %}">Thống kê</a>
+            {% endif %}
           {% endif %}
         </nav>
 
