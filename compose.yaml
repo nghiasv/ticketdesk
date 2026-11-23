@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ticketdesk
+      POSTGRES_USER: ticketdesk
+      POSTGRES_PASSWORD: ticketdesk
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ticketdesk"]
+      interval: 5s
+      retries: 5
+
+volumes:
+  pgdata:
