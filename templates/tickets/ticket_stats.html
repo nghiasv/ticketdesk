@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Thống kê — TicketDesk{% endblock %}
+
+{% block content %}
+  <div class="page-header">
+    <div>
+      <h1>Thống kê</h1>
+      <p class="subtitle">Tổng {{ total }} ticket · {{ unassigned }} ticket chưa có người xử lý · {{ breached }} ticket quá hạn SLA</p>
+    </div>
+  </div>
+
+  <div class="grid-detail">
+    <section class="card">
+      <div class="card-head">Theo trạng thái</div>
+      <div class="card-body">
+        <table class="stats-table">
+          {% for value, label, count in status_rows %}
+            <tr>
+              <td><span class="badge status-{{ value }}">{{ label }}</span></td>
+              <td class="bar-cell">
+                <div class="bar"><span style="width: {% widthratio count total 100 %}%"></span></div>
+              </td>
+              <td class="num">{{ count }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="card-head">Theo nhân viên hỗ trợ</div>
+      <div class="card-body">
+        <table class="stats-table">
+          <tr><th>Nhân viên</th><th class="num">Đang mở</th><th class="num">Tổng</th></tr>
+          {% for agent in agents %}
+            <tr>
+              <td>
+                {{ agent.get_full_name|default:agent.username }}
+                {% if agent.recent_open %}
+                  <div class="recent-tickets">
+                    {% for t in agent.recent_open %}
+                      <a href="{% url 'tickets:detail' t.pk %}" title="{{ t.title }}">{{ t.code }}</a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </td>
+              <td class="num">{{ agent.open_count }}</td>
+              <td class="num">{{ agent.total }}</td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="3" class="muted">Chưa có nhân viên hỗ trợ nào.</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+    </aside>
+  </div>
+{% endblock %}
