@@ -1,0 +1,137 @@
+[
+  {
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$1500000$euYwIsq6UgnPmvZQJPgDKk$YLoQZOBuFbh2wnpq4mOH+Bf5AUE/4+zdOa9Fc7Wt4U0=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-11-02T03:46:38Z",
+      "role": "manager",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1500000$MaGca5dQLKF55RXVxoEs5a$GSnaFDe0pAouNXEZXjlf7fhzfyNyrj4Z0lZFTb8hlh8=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "nghia",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-11-02T06:31:17.001Z",
+      "role": "customer",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$1500000$0q14DYXB4yghFq4eHf9O7u$udt86HiDD/wnfkh892V9YHxzellNNmZROpbHcfNXypY=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "agent",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-11-02T06:54:28.574Z",
+      "role": "agent",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$1500000$kZzzRLsI6q9PaGkRtF3Iav$RfN2XW2OEO8bN5IljKFeFZsQbD1NUlZKr1eHO3vX0Xs=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "nghia1",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-11-02T07:00:09.230Z",
+      "role": "customer",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "tickets.category",
+    "pk": 1,
+    "fields": {
+      "name": "hệ thống"
+    }
+  },
+  {
+    "model": "tickets.category",
+    "pk": 2,
+    "fields": {
+      "name": "thủ tục"
+    }
+  },
+  {
+    "model": "tickets.ticket",
+    "pk": 2,
+    "fields": {
+      "title": "1",
+      "description": "1",
+      "status": "new",
+      "priority": 1,
+      "category": 1,
+      "created_by": 2,
+      "assignee": null,
+      "created_at": "2026-11-02T06:59:03.934Z",
+      "updated_at": "2026-11-02T06:59:03.934Z"
+    }
+  },
+  {
+    "model": "tickets.ticket",
+    "pk": 3,
+    "fields": {
+      "title": "2",
+      "description": "2",
+      "status": "new",
+      "priority": 3,
+      "category": 2,
+      "created_by": 2,
+      "assignee": null,
+      "created_at": "2026-11-02T06:59:09.975Z",
+      "updated_at": "2026-11-02T06:59:09.975Z"
+    }
+  },
+  {
+    "model": "tickets.ticket",
+    "pk": 5,
+    "fields": {
+      "title": "4",
+      "description": "444444",
+      "status": "new",
+      "priority": 3,
+      "category": 1,
+      "created_by": 4,
+      "assignee": null,
+      "created_at": "2026-11-02T07:00:32.773Z",
+      "updated_at": "2026-11-02T08:46:59.519Z"
+    }
+  }
+]
